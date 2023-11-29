@@ -11,12 +11,13 @@ require 'faker'
 
 Question.destroy_all
 
-3.times do
-    Question.create(
-        question: Faker::Lorem.sentence(word_count: 4),
-        answer: Faker::Lorem.sentence(word_count: 6),
-    )
-end
+# 3.times do
+#     Question.create(
+#         question: Faker::Lorem.sentence(word_count: 4),
+#         answer: Faker::Lorem.sentence(word_count: 6),
+#     )
+# end
 
+User.destroy_all
 adminUser = User.create(username: "admin", password: "Password12345")
 puts 'Created Admin user', adminUser

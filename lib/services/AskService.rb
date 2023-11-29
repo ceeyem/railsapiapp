@@ -45,32 +45,6 @@ module Services
       end
 
 
-
-
-    def get_embedding(text, model)
-      OpenAI.configure do |config|
-        config.access_token = MyConfig.openai_api_key
-      end
-
-      client = OpenAI::Client.new
-      response = client.embeddings(
-        parameters: {
-          model: model,
-          input: text
-        }
-      )
-
-      response.dig("data", 0, "embedding")
-    end
-
-    def get_doc_embedding(text)
-      return get_embedding(text, MyConfig.doc_embeddings_model)
-    end
-
-    def get_query_embedding(text)
-      return get_embedding(text, MyConfig.query_embeddings_model)
-    end
-
     def load_embeddings(fname)
 
       df = Daru::DataFrame.from_csv(fname)
