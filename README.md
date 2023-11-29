@@ -53,6 +53,7 @@ rails db:seed
 ```
 cd askmybook
 flyctl launch
+fly deploy
 ```
 
 ### Run locally

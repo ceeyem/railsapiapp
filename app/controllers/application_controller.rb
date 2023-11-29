@@ -3,7 +3,7 @@ class ApplicationController < ActionController::API
 
   def encode_token(payload)
 
-    jwt_secret = Rails.application.credentials.devise[:jwt_secret_key]
+    jwt_secret = ENV.fetch("JWT_SECRET_KEY")
     JWT.encode(payload, jwt_secret)
   end
 
@@ -15,7 +15,7 @@ class ApplicationController < ActionController::API
     if auth_header
       token = auth_header.split(' ')[1]
       begin
-        jwt_secret = Rails.application.credentials.devise[:jwt_secret_key]
+        jwt_secret = ENV.fetch("JWT_SECRET_KEY")
         JWT.decode(token, jwt_secret, true, algorithm: 'HS256')
       rescue JWT::DecodeError
         []
