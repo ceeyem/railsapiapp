@@ -21,7 +21,7 @@ module Services
         def check_question(question)
           question = question.strip
           unless question.end_with? "?"
-            question = question + "?"
+            question = question + " ?"
           end
           question
         end

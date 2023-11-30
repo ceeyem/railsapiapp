@@ -2,7 +2,6 @@ class ApplicationController < ActionController::API
   before_action :require_login
 
   def encode_token(payload)
-
     jwt_secret = ENV.fetch("JWT_SECRET_KEY")
     JWT.encode(payload, jwt_secret)
   end

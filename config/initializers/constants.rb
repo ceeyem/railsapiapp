@@ -29,7 +29,6 @@ class Constants < ActiveRecord::Base
   end
 
   def self.openai_api_key
-    Dotenv.load('.env')
     ENV.fetch("OPENAI_API_KEY")
   end
 
