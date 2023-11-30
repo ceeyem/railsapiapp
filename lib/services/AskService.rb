@@ -20,8 +20,10 @@ module Services
       private
         def check_question(question)
           question = question.strip
-          unless question.end_with? "?"
-            question = question + " ?"
+          if question.end_with? "?"
+            question = question.delete_suffix("?").strip + "?"
+          else
+            question = question + "?"
           end
           question
         end
