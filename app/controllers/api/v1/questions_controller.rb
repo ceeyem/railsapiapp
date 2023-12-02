@@ -5,7 +5,7 @@ class Api::V1::QuestionsController < ApplicationController
 
   # GET /questions
   def index
-    @questions = Question.order(created_at: :desc)
+    @questions = Question.order(ask_count: :desc)
     render json: @questions
   end
 
