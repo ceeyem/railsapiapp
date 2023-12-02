@@ -1,7 +1,6 @@
 class Api::V1::QuestionsController < ApplicationController
-  before_action :set_question, only: %i[ show ]
+  before_action :set_question, only: %i[ show update destroy ]
   before_action :require_login,  only: %i[ index ]
-
 
   # GET /questions
   def index
@@ -25,6 +24,19 @@ class Api::V1::QuestionsController < ApplicationController
     end
   end
 
+  # PATCH/PUT /questions/1
+  def update
+    if @question.update(question_params)
+      render json: @question
+    else
+      render json: @question.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /questions/1
+  def destroy
+    @question.destroy!
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
