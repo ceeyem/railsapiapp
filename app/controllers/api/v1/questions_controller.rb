@@ -1,11 +1,17 @@
 class Api::V1::QuestionsController < ApplicationController
-  before_action :require_login,  only: %i[ index, create ]
+  before_action :set_question, only: %i[ show ]
+  before_action :require_login,  only: %i[ index ]
 
 
   # GET /questions
   def index
-    @questions = Question.order(ask_count: :desc)
+    @questions = Question.order(created_at: :desc)
     render json: @questions
+  end
+
+  # GET /questions/1
+  def show
+    render json: @question
   end
 
   # POST /questions
@@ -18,7 +24,13 @@ class Api::V1::QuestionsController < ApplicationController
       render json: @question.errors, status: :unprocessable_entity
     end
   end
+
+
   private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
   # Only allow a list of trusted parameters through.
   def question_params
